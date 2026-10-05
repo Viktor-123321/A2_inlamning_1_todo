@@ -1,0 +1,7 @@
+#todo-error {
+    color: red;
+}
+
+.todo-done {
+    text-decoration-line: line-through;
+}
