@@ -12,20 +12,38 @@ const todoArr = [];
 function addToList() {
     const value = input.value.trim();
     if (!value) {
-        error.textContent = "Input must not be empty";
+        error.textContent = "Du måste skriva något i fältet";
     } else {
         const listItem = document.createElement("li");
         list.appendChild(listItem);
+        const todoObj = {
+            uppgift: value,
+            "Uppgift klar?": "Ej klar"
+        };
+        todoArr.push(todoObj);
         listItem.textContent = value;
         listItem.addEventListener("click", () => {
             if (listItem.className !== "todo-done") {
                 listItem.className = "todo-done";
                 total++;
-                finished.textContent = total;
+                todoObj["Uppgift klar?"] = "Klar!";
+            } else {
+                listItem.className = "";
+                total--;
+                todoObj["Uppgift klar?"] = "Ej klar";
             }
+        finished.textContent = total;
+        console.log(todoArr);
+        })
+        const trashcan = document.createElement("span");
+        listItem.appendChild(trashcan);
+        trashcan.innerHTML = "&#128465;&#65039;";
+        trashcan.addEventListener("click", () => {
+            listItem.remove();
+            const index = todoArr.indexOf(todoObj);
+            todoArr.splice(index, 1);
         })
         error.textContent = "";
-        todoArr.push({uppgift: listItem.textContent});
     }
 }
 
