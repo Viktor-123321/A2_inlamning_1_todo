@@ -12,7 +12,10 @@ const todoArr = [];
 function addToList() {
     const value = input.value.trim();
     if (!value) {
-        error.textContent = "Du måste skriva något i fältet";
+        error.textContent = "Input must not be empty";
+        error.classList.remove("todo-error");
+        void error.offsetWidth;
+        error.classList.add("todo-error");
     } else {
         const listItem = document.createElement("li");
         list.appendChild(listItem);
@@ -36,10 +39,12 @@ function addToList() {
         console.log(todoArr);
         })
         const trashcan = document.createElement("span");
-        listItem.appendChild(trashcan);
-        trashcan.innerHTML = "&#128465;&#65039;";
-        trashcan.addEventListener("click", () => {
+        list.appendChild(trashcan);
+        trashcan.innerHTML = "&#128465;&#65039;<br>";
+        trashcan.addEventListener("click", (event) => {
+            event.stopPropagation();
             listItem.remove();
+            trashcan.remove();
             const index = todoArr.indexOf(todoObj);
             todoArr.splice(index, 1);
         })
