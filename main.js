@@ -35,12 +35,12 @@ function addToList() {
                 total--;
                 todoObj["Uppgift klar?"] = "Ej klar";
             }
-        finished.textContent = total;
-        console.log(todoArr);
+            finished.textContent = total;
+            console.log(todoArr);
         })
         const trashcan = document.createElement("span");
-        list.appendChild(trashcan);
-        trashcan.innerHTML = "&#128465;&#65039;<br>";
+        listItem.appendChild(trashcan);
+        trashcan.innerHTML = "&#128465;&#65039;" + "<br>";
         trashcan.addEventListener("click", (event) => {
             event.stopPropagation();
             listItem.remove();
