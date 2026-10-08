@@ -13,7 +13,7 @@ div#card {
     width: 39%;
     text-align: center;
     background-color: white;
-    padding: 20px 20px 32px;
+    padding: 20px 20px 15px;
     box-shadow: 0 0 25px rgba(10, 10, 10, 0.185);
     animation: move-card 0.8s ease-in-out;
 }
@@ -113,6 +113,15 @@ button:hover {
     }
 }
 
+@keyframes item-done {
+    0% {
+        color: rgba(0, 0, 0, 1);
+    }
+    100% {
+        color: rgba(0, 0, 0, 0.6);
+    }
+}
+
 span.todo-error {
     display: inline-block;
     font-family: Arial, Helvetica, sans-serif;
@@ -120,12 +129,13 @@ span.todo-error {
     font-size: 11.7px;
     font-weight: 600;
     font-style: italic;
-    margin: 7px 0 10px;
-    animation: error-blink 0.5s 3;
+    margin: 7px 0 0;
+    animation: error-blink 0.5s 0.1s 2;
 }
 
 ul {
     list-style-type: none;
+    margin: 20px 0;
 }
 
 li {
@@ -133,7 +143,7 @@ li {
     font-size: 20px;
     font-weight: 500;
     cursor: pointer;
-    margin-top: 10px;
+    margin: 10px 0 0;
 }
 
 ul li span {
@@ -141,10 +151,11 @@ ul li span {
     margin-left: 9px;
     filter: grayscale(100%) brightness(110%);
     display: inline-block;
+    color: rgba(0, 0, 0, 1);
 }
 
-ul li {
-    animation: move-list-item 0.3s ease-in-out;
+ul li.new-item {
+    animation: move-list-item 0.2s ease-in-out;
 }
 
 li.todo-done {
@@ -152,7 +163,6 @@ li.todo-done {
     color: rgba(0, 0, 0, 0.6);
 }
 
-li.todo-done span {
-    text-decoration-line: none;
-    color: rgba(0, 0, 0, 1);
+ul li.todo-done-anim {
+    animation: item-done 0.3s ease-in-out 0.7s both;
 }

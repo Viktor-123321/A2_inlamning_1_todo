@@ -18,6 +18,7 @@ function addToList() {
         error.classList.add("todo-error");
     } else {
         const listItem = document.createElement("li");
+        listItem.classList.add("new-item");
         list.appendChild(listItem);
         const todoObj = {
             uppgift: value,
@@ -26,18 +27,27 @@ function addToList() {
         todoArr.push(todoObj);
         listItem.textContent = value;
         listItem.addEventListener("click", () => {
-            if (listItem.className !== "todo-done") {
-                listItem.className = "todo-done";
+            if (!listItem.classList.contains("todo-done")) {
+                listItem.classList.remove("new-item");
+                listItem.classList.add("todo-done");
+                listItem.classList.add("todo-done-anim");
                 total++;
                 todoObj["Uppgift klar?"] = "Klar!";
+                listItem.addEventListener(
+                    "animationend",
+                    () => {
+                        listItem.classList.remove("todo-done-anim");
+                    },
+                    { once: true }
+                );
             } else {
-                listItem.className = "";
+                listItem.classList.remove("todo-done");
                 total--;
                 todoObj["Uppgift klar?"] = "Ej klar";
             }
             finished.textContent = total;
             console.log(todoArr);
-        })
+        });
         const trashcan = document.createElement("span");
         listItem.appendChild(trashcan);
         trashcan.innerHTML = "&#128465;&#65039;" + "<br>";
@@ -47,8 +57,9 @@ function addToList() {
             trashcan.remove();
             const index = todoArr.indexOf(todoObj);
             todoArr.splice(index, 1);
-        })
+        });
         error.textContent = "";
+        error.className = "";
     }
 }
 
