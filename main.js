@@ -26,6 +26,7 @@ function addToList() {
         };
         todoArr.push(todoObj);
         listItem.textContent = value;
+        input.value = "";
         listItem.addEventListener("click", () => {
             if (!listItem.classList.contains("todo-done")) {
                 listItem.classList.remove("new-item");
